@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: github-runner-{{TAG}}
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: github-runner-{{TAG}}
+  template:
+    metadata:
+      labels:
+        app: github-runner-{{TAG}}
+    spec:
+      containers:
+        - name: github-runner
+          image: 994318991266.dkr.ecr.eu-west-1.amazonaws.com/github-runner:{{TAG}}
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: TOKEN
+            value: {{TOKEN}}
+          volumeMounts:
+          - name: dockersock
+            mountPath: "/var/run/docker.sock"
+      volumes:
+      - name: dockersock
+        hostPath:
+          path: /var/run/docker.sock  
