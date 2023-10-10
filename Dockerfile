@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-RUN apt update && apt install -y bash clang ca-certificates curl wget gnupg lsb-release unzip fuse-overlayfs
+RUN apt update && apt install -y bash clang ca-certificates curl wget gnupg lsb-release unzip fuse-overlayfs python3 python3-pip
 RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 RUN install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 RUN curl -o awscliv2.zip -L https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip && unzip awscliv2.zip && ./aws/install
